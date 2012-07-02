@@ -30,7 +30,6 @@ public class AIDPerspective implements PerspectiveSPI {
 	public InputStream getLayoutInputStream() {
 		// This is a layout file created using taverna perspective design, and adding aida plugin within the layout
 		// The version of Workbench that will be using the plugin, must be the same with the version of taverna workbench  used to create this layout
-		// Currently this is created by using taverna workbench 2.1.0, updated version.
 		return  getClass().getResourceAsStream("aida-perspective.xml");
 
 	}

@@ -11,6 +11,7 @@ import java.beans.PropertyChangeListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextPane;
@@ -24,12 +25,11 @@ import org.jdesktop.swingx.JXGlassBox;
 import org.jdesktop.swingx.JXTable;
 import org.jdesktop.swingx.JXTaskPane;
 import org.jdesktop.swingx.JXTaskPaneContainer;
-import org.jdesktop.swingx.LinkModel;
-import org.jdesktop.swingx.action.LinkModelAction;
+import org.jdesktop.swingx.hyperlink.LinkModel;
+import org.jdesktop.swingx.hyperlink.LinkModelAction;
 import org.jdesktop.swingx.renderer.DefaultTableRenderer;
 import org.jdesktop.swingx.renderer.HyperlinkProvider;
 import org.json.JSONObject;
-import org.lobobrowser.html.gui.HtmlPanel;
 import org.vle.aid.taverna.build.AIDBuildTreeTable;
 import org.vle.aid.taverna.build.AIDBuildTreeTableModel;
 import org.vle.aid.taverna.components.Gui;
@@ -73,7 +73,7 @@ public class AIDSearchPanel extends JXTaskPaneContainer implements TreeModelList
     /* Lower part, original documents */
     JXTaskPane	       documentPane	   = null;
 
-    HtmlPanel		htmlPanel	      = null;
+    JEditorPane		htmlPanel	      = null;
 
     HyperlinkProvider	provider	       = null;
 
@@ -82,9 +82,6 @@ public class AIDSearchPanel extends JXTaskPaneContainer implements TreeModelList
     AIDSearchQueryWorker     searchWorker	   = null;
 
     public AIDSearchPanel() {
-
-	/* Makes the lobobrowser quiet about what they're doing */
-	Logger.getLogger("org.lobobrowser").setLevel(Level.SEVERE);
 
 	setupSearchPanel();
 	setupDocumentPanel();
@@ -127,7 +124,8 @@ public class AIDSearchPanel extends JXTaskPaneContainer implements TreeModelList
      * result panel to update original document in the lower part.
      */
     private void setupHyperlinkProviderAndSearchTable() {
-	htmlPanel = new HtmlPanel();
+	htmlPanel = new JEditorPane();
+	htmlPanel.setEditable(false);
 	linkVisitor = new AIDHtmlPaneLinkVisitor(htmlPanel);
 	provider = new HyperlinkProvider(new LinkModelAction<LinkModel>(linkVisitor), LinkModel.class);
 
@@ -168,8 +166,8 @@ public class AIDSearchPanel extends JXTaskPaneContainer implements TreeModelList
 	Dimension preferredSize = searchResultTable.getPreferredSize();
 	preferredSize.height += 50;
 	searchResultScrollPane.setPreferredSize(preferredSize);
-	searchResultPane.setExpanded(false);
-	searchResultPane.setExpanded(true);
+	searchResultPane.setCollapsed(true);
+	searchResultPane.setCollapsed(false);
 	searchNavigator.update(lastStart, newModel.getHits(), lastQuery + " " + lastBuildQueryString);
 
     }

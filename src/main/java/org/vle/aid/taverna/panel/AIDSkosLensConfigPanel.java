@@ -91,7 +91,7 @@ public class AIDSkosLensConfigPanel extends JXTaskPane implements ItemListener, 
 			comboNarrower.addItemListener(this);
 			
 			setAnimated(false);
-			setExpanded(true);
+			setCollapsed(false);
 			setupAttemptedLens("");
    }
    

@@ -5,7 +5,7 @@ import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreePath;
 
-import org.jdesktop.swingx.LinkModel;
+import org.jdesktop.swingx.hyperlink.LinkModel;
 import org.jdesktop.swingx.treetable.TreeTableModel;
 import org.vle.aid.taverna.remote.AIDRemoteQuery;
 

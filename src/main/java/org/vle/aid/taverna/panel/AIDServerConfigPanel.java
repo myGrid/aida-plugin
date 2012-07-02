@@ -85,7 +85,7 @@ public class AIDServerConfigPanel extends JXTaskPane implements KeyListener, Ite
 		comboHost.addItemListener(this);
 
 		setAnimated(false);
-		setExpanded(true);
+		setCollapsed(false);
 	}
 
 	public void keyPressed(KeyEvent e) {

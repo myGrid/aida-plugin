@@ -2,19 +2,18 @@ package org.vle.aid.taverna.search;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 
+import javax.swing.JEditorPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
 
-import org.jdesktop.swingx.LinkModel;
-import org.lobobrowser.html.gui.HtmlPanel;
-import org.lobobrowser.html.test.SimpleHtmlRendererContext;
-import org.lobobrowser.html.test.SimpleUserAgentContext;
+import org.jdesktop.swingx.hyperlink.LinkModel;
 import org.vle.aid.taverna.AIDEditDataflow;
 
 import java.util.logging.*;
@@ -32,15 +31,14 @@ public class AIDHtmlPaneLinkVisitor implements ActionListener {
 
 	private LinkModel internalLink;
 
-	private HtmlPanel editorPane = null;
-
-	private SimpleHtmlRendererContext ucontext = null;
+	private JEditorPane editorPane = null;
+	
+	private static Logger logger = Logger.getLogger(AIDHtmlPaneLinkVisitor.class.getName());
 
 	public AIDHtmlPaneLinkVisitor() {
-	    this(null);
 	}
 
-	public AIDHtmlPaneLinkVisitor(HtmlPanel pane) {
+	public AIDHtmlPaneLinkVisitor(JEditorPane pane) {
 	    	Logger.getLogger("org.lobobrowser").setLevel(Level.OFF);
 	    	Logger.getLogger("com.steadystate").setLevel(Level.OFF);
 	    	
@@ -48,11 +46,10 @@ public class AIDHtmlPaneLinkVisitor implements ActionListener {
 			pane = createDefaultEditorPane();
 		
 		editorPane = pane;
-		ucontext = new SimpleHtmlRendererContext(editorPane,new SimpleUserAgentContext());
 		
 	}
 
-	public HtmlPanel getOutputComponent() {
+	public JEditorPane getOutputComponent() {
 		return editorPane;
 	}
 
@@ -81,8 +78,7 @@ public class AIDHtmlPaneLinkVisitor implements ActionListener {
 	    	        try {
 			    url = new URL("http://www.myexperiment.org/workflows/"+workflowID+"/download");
 			} catch (MalformedURLException e) {
-			    // TODO Auto-generated catch block
-			    e.printStackTrace();
+				logger.severe(e.getMessage());
 			}
 			
 	    	    	//AIDEditDataflow.loadRemoteWorkflow(url);
@@ -93,17 +89,18 @@ public class AIDHtmlPaneLinkVisitor implements ActionListener {
 
 	public void visit(LinkModel link) {
 		try {		    	
-			ucontext.navigate(link.getURL().toString());
+			editorPane.setPage(link.getURL());
 			editorPane.revalidate();
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			logger.severe(e.getMessage());
+		} catch (IOException e) {
+			logger.severe(e.getMessage());		}
 	}
 
-	protected HtmlPanel createDefaultEditorPane() {
-		final HtmlPanel editorPane = new HtmlPanel();
-
+	protected JEditorPane createDefaultEditorPane() {
+		final JEditorPane editorPane = new JEditorPane();
+		editorPane.setEditable(false);
 		return editorPane;
 	}
 

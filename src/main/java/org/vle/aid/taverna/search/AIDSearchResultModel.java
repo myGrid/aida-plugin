@@ -8,7 +8,7 @@ import javax.swing.table.TableModel;
 
 
 
-import org.jdesktop.swingx.LinkModel;
+import org.jdesktop.swingx.hyperlink.LinkModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

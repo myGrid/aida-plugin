@@ -18,11 +18,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-import org.apache.axis.wsdl.toJava.JavaGeneratorFactory;
 import org.jdesktop.swingx.JXBusyLabel;
 import org.jdesktop.swingx.JXDialog;
 import org.jdesktop.swingx.JXFrame;
-import org.jdesktop.swingx.JXGlassBox;
 import org.jdesktop.swingx.JXPanel;
 import org.jdesktop.swingx.JXTaskPane;
 import org.jdesktop.swingx.JXTaskPaneContainer;
@@ -136,7 +134,7 @@ public class Gui {
 	detailPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 
 	detailTaskPane.add(detailPane);
-	detailTaskPane.setExpanded(false);
+	detailTaskPane.setCollapsed(true);
 	detailTaskPane.setTitle("Error Details");
 
 	container.add(errorTaskPane);

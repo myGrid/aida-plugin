@@ -3,7 +3,7 @@ package org.vle.aid.taverna.search;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.jdesktop.swingx.LinkModel;
+import org.jdesktop.swingx.hyperlink.LinkModel;
 
 public class AIDSearchResultItem {
 	
